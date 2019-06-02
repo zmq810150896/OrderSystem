@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active:
+    - provider8001
+---
+
+server:
+  port: 8001
+spring:
+  profiles: provider8001
+  application:    name: OrderSystem
+  datasource:
+#   数据源基本配置
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/x_foot?ullNamePatternMatchesAll=true&amp;serverTimezone=GMT%2b8?useUnicode=true&characterEncoding=utf8
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      driver-class-name: com.mysql.jdbc.Driver
+  http:
+    multipart:
+      max-file-size: 500Mb
+      max-request-size: 500Mb
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url: 
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
+  instance:
+    instance-id: Orderservicecloud-8001
+    prefer-ip-address: true 
+
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+ #  configuration:#    call-setters-on-nulls: true#    map-underscore-to-camel-case: true
+
+#endpoints:#  beans:#    path: classpath:mybatis/spring-bean.xml
+#上传文件大小设置
+
+#multipart.maxFileSize=500Mb
+#multipart.maxRequestSize=500Mb
+#  configuration:
+#      call-setters-on-nulls: true
+#  configuration:
+#    map-underscore-to-camel-case: true
